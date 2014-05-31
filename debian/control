@@ -1,0 +1,22 @@
+
+Source: capi-media-image-util
+Section: libs
+Priority: extra
+Maintainer: Seungkeun Lee <sngn.lee@samsung.com>, Kangho Hur<kagho.hur@samsung.com>
+Build-Depends: debhelper (>= 5), libmm-utility-dev , capi-base-common-dev , dlog-dev
+
+Package: capi-media-image-util
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: A Image Utility library in Tizen Native API
+
+Package: capi-media-image-util-dev
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, capi-media-image-util (= ${Source-Version}), capi-base-common-dev
+Description: A Image Utility library in Tizen Native API (DEV)
+
+Package: capi-media-image-util-dbg
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, capi-media-image-util (= ${Source-Version})
+Description: A Image Utility library in Tizen Native API (DBG)
+
