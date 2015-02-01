@@ -24,8 +24,8 @@ SET(service "media")
 SET(submodule "image-util")
 
 # for package file
-SET(dependents "dlog mmutil-jpeg mmutil-imgp capi-base-common")
-SET(pc_dependents "capi-base-common")
+SET(dependents "dlog mmutil-jpeg mmutil-imgp capi-base-common capi-media-tool mm-common")
+SET(pc_dependents "dlog capi-base-common capi-media-tool mm-common")
 
 SET(fw_name "${project_prefix}-${service}-${submodule}")
 
