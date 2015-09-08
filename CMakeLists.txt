@@ -24,8 +24,8 @@ SET(service "media")
 SET(submodule "image-util")
 
 # for package file
-SET(dependents "dlog mmutil-jpeg mmutil-imgp capi-base-common")
-SET(pc_dependents "capi-base-common")
+SET(dependents "dlog mmutil-jpeg mmutil-imgp capi-base-common capi-media-tool mm-common")
+SET(pc_dependents "dlog capi-base-common capi-media-tool mm-common")
 
 SET(fw_name "${project_prefix}-${service}-${submodule}")
 
@@ -53,6 +53,9 @@ ENDIF("${ARCH}" MATCHES "^arm.*")
 
 ADD_DEFINITIONS("-DPREFIX=\"${CMAKE_INSTALL_PREFIX}\"")
 ADD_DEFINITIONS("-DTIZEN_DEBUG")
+IF(FEATURE_ENABLE_HW_ACCELERATION)
+ADD_DEFINITIONS("-DENABLE_HW_ACCELERATION")
+ENDIF(FEATURE_ENABLE_HW_ACCELERATION)
 
 SET(CMAKE_EXE_LINKER_FLAGS "-Wl,--as-needed -Wl,--rpath=/usr/lib")
 
