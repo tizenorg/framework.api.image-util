@@ -1,7 +1,7 @@
 Name:       capi-media-image-util
 Summary:    A Image Utility library in Tizen Native API
-Version:    0.1.3
-Release:    28
+Version:    0.1.10
+Release:    31
 Group:      System/Libraries
 License:    Apache-2.0
 Source0:    %{name}-%{version}.tar.gz
@@ -12,8 +12,6 @@ BuildRequires:  pkgconfig(mmutil-imgp)
 BuildRequires:  pkgconfig(capi-base-common)
 BuildRequires:  pkgconfig(capi-media-tool)
 BuildRequires:  cmake
-BuildRequires:  gettext-devel
-BuildRequires:  model-build-features
 
 %description
 A Image Utility library in Tizen Native API
@@ -36,6 +34,9 @@ A Image Utility library in Tizen Native API (Developement)
 %setup -q
 
 %build
+export CFLAGS+=" -Wextra -Wno-array-bounds"
+export CFLAGS+=" -Wno-ignored-qualifiers -Wno-unused-parameter -Wshadow"
+export CFLAGS+=" -Wwrite-strings -Wswitch-default"
 MAJORVER=`echo %{version} | awk 'BEGIN {FS="."}{print $1}'`
 cmake . -DCMAKE_INSTALL_PREFIX=/usr -DFULLVER=%{version} -DMAJORVER=${MAJORVER} \
 %if 0%{?model_build_feature_multimedia_image_hw_acceleration}

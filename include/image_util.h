@@ -36,7 +36,7 @@ extern "C"
 
 /**
 * @brief Creates a handle to image util transform.
-* @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+* @since_tizen 2.3
 *
 * @details This function creates a handle to image util transform.
 *
@@ -59,7 +59,7 @@ int image_util_transform_create(transformation_h *handle);
 
 /**
 * @brief Sets the image util's accurate mode.
-* @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+* @since_tizen 2.3
 *
 * @details This function set if you use hardware accerlation or not.
 *
@@ -74,6 +74,7 @@ int image_util_transform_create(transformation_h *handle);
 *
 * @retval #IMAGE_UTIL_ERROR_NONE Successful
 * @retval #IMAGE_UTIL_ERROR_INVALID_PARAMETER Invalid parameter
+* @retval #IMAGE_UTIL_ERROR_INVALID_OPERATION Invalid operation
 * @retval #IMAGE_UTIL_ERROR_PERMISSION_DENIED The application does not have the privilege to call this funtion
 * @retval #IMAGE_UTIL_ERROR_NOT_SUPPORTED The application does not have the hardware acceleration
 *
@@ -86,7 +87,7 @@ int image_util_transform_set_hardware_acceleration(transformation_h handle, bool
 
 /**
 * @brief Sets the information of the converting
-* @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+* @since_tizen 2.3
 *
 * @param[in] handle The handle to image util transform
 * @param[in] colorspace The colorspace of the image buffer
@@ -96,6 +97,7 @@ int image_util_transform_set_hardware_acceleration(transformation_h handle, bool
 *
 * @retval #IMAGE_UTIL_ERROR_NONE Successful
 * @retval #IMAGE_UTIL_ERROR_INVALID_PARAMETER Invalid parameter
+* @retval #IMAGE_UTIL_ERROR_INVALID_OPERATION Invalid operation
 * @retval #IMAGE_UTIL_ERROR_PERMISSION_DENIED The application does not have the privilege to call this funtion
 * @retval #IMAGE_UTIL_ERROR_NOT_SUPPORTED_FORMAT Not supported format
 *
@@ -109,7 +111,9 @@ int image_util_transform_set_colorspace(transformation_h handle, image_util_colo
 
 /**
 * @brief Sets the information of the resizing
-* @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+* @since_tizen 2.3
+*
+* @remarks image_util_transform_set_resolution and image_util_transform_set_crop_area can't do that at the same time.
 *
 * @param[in] handle The handle to image util transform
 * @param[in] width The width of image buffer
@@ -120,6 +124,7 @@ int image_util_transform_set_colorspace(transformation_h handle, image_util_colo
 *
 * @retval #IMAGE_UTIL_ERROR_NONE Successful
 * @retval #IMAGE_UTIL_ERROR_INVALID_PARAMETER Invalid parameter
+* @retval #IMAGE_UTIL_ERROR_INVALID_OPERATION Invalid operation
 * @retval #IMAGE_UTIL_ERROR_PERMISSION_DENIED The application does not have the privilege to call this funtion
 *
 * @pre image_util_transform_create().
@@ -132,7 +137,7 @@ int image_util_transform_set_resolution(transformation_h handle, unsigned int wi
 
 /**
 * @brief Sets the information of the rotating
-* @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+* @since_tizen 2.3
 *
 * @param[in] handle The handle to image util transform
 * @param[in] rotation The rotation value of image buffer
@@ -142,6 +147,7 @@ int image_util_transform_set_resolution(transformation_h handle, unsigned int wi
 *
 * @retval #IMAGE_UTIL_ERROR_NONE Successful
 * @retval #IMAGE_UTIL_ERROR_INVALID_PARAMETER Invalid parameter
+* @retval #IMAGE_UTIL_ERROR_INVALID_OPERATION Invalid operation
 * @retval #IMAGE_UTIL_ERROR_PERMISSION_DENIED The application does not have the privilege to call this funtion
 *
 * @pre image_util_transform_create().
@@ -154,7 +160,9 @@ int image_util_transform_set_rotation(transformation_h handle, image_util_rotati
 
 /**
 * @brief Sets the information of the cropping
-* @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+* @since_tizen 2.3
+*
+* @remarks image_util_transform_set_resolution and image_util_transform_set_crop_area can't do that at the same time.
 *
 * @param[in] handle The handle to image util transform
 * @param[in] start_x The start x position of cropped image buffer
@@ -167,6 +175,7 @@ int image_util_transform_set_rotation(transformation_h handle, image_util_rotati
 *
 * @retval #IMAGE_UTIL_ERROR_NONE Successful
 * @retval #IMAGE_UTIL_ERROR_INVALID_PARAMETER Invalid parameter
+* @retval #IMAGE_UTIL_ERROR_INVALID_OPERATION Invalid operation
 * @retval #IMAGE_UTIL_ERROR_PERMISSION_DENIED The application does not have the privilege to call this funtion
 *
 * @pre image_util_transform_create().
@@ -179,16 +188,17 @@ int image_util_transform_set_crop_area(transformation_h handle, unsigned int sta
 
 /**
 * @brief Gets the colorspace of the image buffer
-* @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+* @since_tizen 2.3
 *
 * @param[in] handle The handle to image util transform
-* @param[in,out] colorspace The colorspace of the image buffer
+* @param[in, out] colorspace The colorspace of the image buffer
 *
 * @return @c 0 on success,
 *               otherwise a negative error value
 *
 * @retval #IMAGE_UTIL_ERROR_NONE Successful
 * @retval #IMAGE_UTIL_ERROR_INVALID_PARAMETER Invalid parameter
+* @retval #IMAGE_UTIL_ERROR_INVALID_OPERATION Invalid operation
 * @retval #IMAGE_UTIL_ERROR_NOT_SUPPORTED_FORMAT Not supported format
 *
 * @pre image_util_transform_create().\n
@@ -201,17 +211,18 @@ int image_util_transform_get_colorspace(transformation_h handle, image_util_colo
 
 /**
 * @brief Gets the resolution of the image buffer
-* @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+* @since_tizen 2.3
 *
 * @param[in] handle The handle to image util transform
-* @param[in,out] width The width of source image buffer
-* @param[in,out] height The height of source image buffer
+* @param[in, out] width The width of source image buffer
+* @param[in, out] height The height of source image buffer
 *
 * @return @c 0 on success,
 *               otherwise a negative error value
 *
 * @retval #IMAGE_UTIL_ERROR_NONE Successful
 * @retval #IMAGE_UTIL_ERROR_INVALID_PARAMETER Invalid parameter
+* @retval #IMAGE_UTIL_ERROR_INVALID_OPERATION Invalid operation
 * @retval #IMAGE_UTIL_ERROR_PERMISSION_DENIED The application does not have the privilege to call this funtion
 *
 * @pre image_util_transform_create().\n
@@ -220,20 +231,21 @@ int image_util_transform_get_colorspace(transformation_h handle, image_util_colo
 * @see image_util_transform_create()
 * @see image_util_transform_destroy()
 */
-int image_util_transform_get_resolution(transformation_h handle, unsigned int *width , unsigned int *height);
+int image_util_transform_get_resolution(transformation_h handle, unsigned int *width, unsigned int *height);
 
 /**
 * @brief Gets the information of the rotating
-* @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+* @since_tizen 2.3
 *
 * @param[in] handle The handle to image util transform
-* @param[in,out] rotation The rotation value of image buffer
+* @param[in, out] rotation The rotation value of image buffer
 *
 * @return @c 0 on success,
 *               otherwise a negative error value
 *
 * @retval #IMAGE_UTIL_ERROR_NONE Successful
 * @retval #IMAGE_UTIL_ERROR_INVALID_PARAMETER Invalid parameter
+* @retval #IMAGE_UTIL_ERROR_INVALID_OPERATION Invalid operation
 * @retval #IMAGE_UTIL_ERROR_PERMISSION_DENIED The application does not have the privilege to call this funtion
 *
 * @pre image_util_transform_create().\n
@@ -246,19 +258,20 @@ int image_util_transform_get_rotation(transformation_h handle, image_util_rotati
 
 /**
 * @brief Gets the information of the cropping
-* @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+* @since_tizen 2.3
 *
 * @param[in] handle The handle to image util transform
-* @param[in,out] start_x The start x position of cropped source image buffer
-* @param[in,out] start_y The start y position of cropped source image buffer
-* @param[in,out] end_x The end x position of cropped source image buffer
-* @param[in,out] end_y The end y position of cropped source image buffer
+* @param[in, out] start_x The start x position of cropped source image buffer
+* @param[in, out] start_y The start y position of cropped source image buffer
+* @param[in, out] end_x The end x position of cropped source image buffer
+* @param[in, out] end_y The end y position of cropped source image buffer
 *
 * @return @c 0 on success,
 *               otherwise a negative error value
 *
 * @retval #IMAGE_UTIL_ERROR_NONE Successful
 * @retval #IMAGE_UTIL_ERROR_INVALID_PARAMETER Invalid parameter
+* @retval #IMAGE_UTIL_ERROR_INVALID_OPERATION Invalid operation
 * @retval #IMAGE_UTIL_ERROR_PERMISSION_DENIED The application does not have the privilege to call this funtion
 *
 * @pre image_util_transform_create().\n
@@ -271,11 +284,12 @@ int image_util_transform_get_crop_area(transformation_h handle, unsigned int *st
 
 /**
 * @brief Transform the image for given image util handle.
-* @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+* @since_tizen 2.3
 *
-*@remarks If H/W acceleration is not set, transformation is done via S/W acceleration.
+* @remarks If H/W acceleration is not set, transformation is done via S/W acceleration.
 *
-* @details The function execute asynchronously, which contains complete callback
+* @details The function execute asynchronously, which contains complete callback \n
+*          If you set more than two transforming, the order of running is crop or resolution, colorspace converting, rotaion. \n
 *
 * @param[in] handle The handle of transform
 * @param[in] src The handle to image util transform
@@ -287,6 +301,7 @@ int image_util_transform_get_crop_area(transformation_h handle, unsigned int *st
 *
 * @retval #IMAGE_UTIL_ERROR_NONE Successful
 * @retval #IMAGE_UTIL_ERROR_INVALID_PARAMETER Invalid parameter
+* @retval #IMAGE_UTIL_ERROR_INVALID_OPERATION Invalid operation
 * @retval #IMAGE_UTIL_ERROR_PERMISSION_DENIED The application does not have the privilege to call this funtion
 *
 * @see image_util_transform_create()
@@ -297,7 +312,7 @@ int image_util_transform_run(transformation_h handle, media_packet_h src, image_
 
 /**
 * @brief Destroys a handle to image util.
-* @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+* @since_tizen 2.3
 *
 * @details The function frees all resources related to the image util handle. The image util
 *               handle no longer can be used to perform any operation. A new image util handle
@@ -319,7 +334,7 @@ int image_util_transform_destroy(transformation_h handle);
 
 /**
 * @brief Called once for each supported JPEG encode/decode colorspace.
-* @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+* @since_tizen 2.3
 *
 * @param[in] colorspace The colorspace
 * @param[in] user_data The user data passed from the foreach function
@@ -335,11 +350,11 @@ int image_util_transform_destroy(transformation_h handle);
 * @see image_util_decode_jpeg()
 * @see image_util_decode_jpeg_from_memory()
 */
-typedef bool (*image_util_supported_jpeg_colorspace_cb)( image_util_colorspace_e colorspace , void * user_data);
+typedef bool(*image_util_supported_jpeg_colorspace_cb)(image_util_colorspace_e colorspace, void *user_data);
 
 /**
 * @brief Retrieves all supported JPEG encoding/decoding colorspace by invoking a callback function once for each one.
-* @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+* @since_tizen 2.3
 *
 * @param[in] callback The callback function to invoke
 * @param[in] user_data The user data to be passed to the callback function
@@ -357,11 +372,11 @@ typedef bool (*image_util_supported_jpeg_colorspace_cb)( image_util_colorspace_e
 * @see image_util_decode_jpeg()
 * @see image_util_decode_jpeg_from_memory()
 */
-int image_util_foreach_supported_jpeg_colorspace(image_util_supported_jpeg_colorspace_cb callback, void * user_data);
+int image_util_foreach_supported_jpeg_colorspace(image_util_supported_jpeg_colorspace_cb callback, void *user_data);
 
 /**
 * @brief Calculates the size of the image buffer for the specified resolution and colorspace.
-* @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+* @since_tizen 2.3
 *
 * @param[in] width The image width
 * @param[in] height The image height
@@ -381,15 +396,17 @@ int image_util_foreach_supported_jpeg_colorspace(image_util_supported_jpeg_color
 * @see image_util_encode_jpeg()
 * @see image_util_encode_jpeg_to_memory()
 */
-int image_util_calculate_buffer_size(int width , int height, image_util_colorspace_e colorspace  , unsigned int *size);
+int image_util_calculate_buffer_size(int width, int height, image_util_colorspace_e colorspace , unsigned int *size);
 
 /**
 * @brief Decodes the JPEG image to the buffer.
-* @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+* @since_tizen 2.3
 *
 * @remarks You must release @a image_buffer using free().\n
 *                 http://tizen.org/privilege/mediastorage is needed if input or output path are relevant to media storage.\n
-*                 http://tizen.org/privilege/externalstorage is needed if input or output path are relevant to external storage.
+*                 http://tizen.org/privilege/externalstorage is needed if input or output path are relevant to external storage.\n
+*                 If you decode the JPEG image which has odd numbered width or height to YUV colorspace, \n
+*                 the width or height of decoded data will be rounded down to even numbered width or height.
 *
 * @param[in] path The image file path
 * @param[in] colorspace The decoded image colorspace
@@ -412,13 +429,15 @@ int image_util_calculate_buffer_size(int width , int height, image_util_colorspa
 * @see image_util_decode_jpeg_from_memory()
 * @see image_util_foreach_supported_jpeg_colorspace()
 */
-int image_util_decode_jpeg( const char *path , image_util_colorspace_e colorspace, unsigned char ** image_buffer , int *width , int *height , unsigned int *size);
+int image_util_decode_jpeg(const char *path, image_util_colorspace_e colorspace, unsigned char **image_buffer, int *width, int *height, unsigned int *size);
 
 /**
 * @brief Decodes the JPEG image(in memory) to the buffer.
-* @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+* @since_tizen 2.3
 *
-* @remarks You must release @a image_buffer using free().
+* @remarks You must release @a image_buffer using free().\n
+*                  If you decode the JPEG image which has odd numbered width or height to YUV colorspace, \n
+*                  the width or height of decoded data will be rounded down to even numbered width or height.
 *
 * @param[in] jpeg_buffer The JPEG image buffer
 * @param[in] jpeg_size The JPEG image buffer size
@@ -442,11 +461,78 @@ int image_util_decode_jpeg( const char *path , image_util_colorspace_e colorspac
 * @see image_util_decode_jpeg()
 * @see image_util_foreach_supported_jpeg_colorspace()
 */
-int image_util_decode_jpeg_from_memory( const unsigned char * jpeg_buffer , int jpeg_size , image_util_colorspace_e colorspace, unsigned char ** image_buffer , int *width , int *height , unsigned int *size);
+int image_util_decode_jpeg_from_memory(const unsigned char *jpeg_buffer, int jpeg_size, image_util_colorspace_e colorspace, unsigned char **image_buffer, int *width, int *height, unsigned int *size);
+
+/**
+* @brief Decodes the JPEG image to the buffer with downscale decoding option.
+* @since_tizen 2.4
+*
+* @remarks You must release @a image_buffer using free().\n
+*                 http://tizen.org/privilege/mediastorage is needed if input or output path are relevant to media storage.\n
+*                 http://tizen.org/privilege/externalstorage is needed if input or output path are relevant to external storage.\n
+*                 If you decode the JPEG image which has odd numbered width or height to YUV colorspace, \n
+*                 the width or height of decoded data will be rounded down to even numbered width or height.
+*
+* @param[in] path The image file path
+* @param[in] colorspace The decoded image colorspace
+* @param[in] downscale The downscale value
+* @param[out] image_buffer The image buffer for the decoded image
+* @param[out] width The image width
+* @param[out] height The image height
+* @param[out] size The image buffer size
+*
+* @return @c 0 on success,
+*               otherwise a negative error value
+*
+* @retval #IMAGE_UTIL_ERROR_NONE Successful
+* @retval #IMAGE_UTIL_ERROR_INVALID_PARAMETER Invalid parameter
+* @retval #IMAGE_UTIL_ERROR_OUT_OF_MEMORY out of memory
+* @retval #IMAGE_UTIL_ERROR_NOT_SUPPORTED_FORMAT Format not supported
+* @retval #IMAGE_UTIL_ERROR_INVALID_OPERATION Invalid operation
+* @retval #IMAGE_UTIL_ERROR_PERMISSION_DENIED The application does not have the privilege to call this funtion
+*
+* @see image_util_supported_jpeg_colorspace_cb()
+* @see image_util_decode_jpeg_from_memory()
+* @see image_util_foreach_supported_jpeg_colorspace()
+*/
+int image_util_decode_jpeg_with_downscale(const char *path, image_util_colorspace_e colorspace, image_util_scale_e downscale, unsigned char **image_buffer, int *width, int *height, unsigned int *size);
+
+/**
+* @brief Decodes the JPEG image(in memory) to the buffer with downscale decoding option.
+* @since_tizen 2.4
+*
+* @remarks You must release @a image_buffer using free().\n
+*                   If you decode the JPEG image which has odd numbered width or height to YUV colorspace, \n
+*                   the width or height of decoded data will be rounded down to even numbered width or height.
+*
+* @param[in] jpeg_buffer The JPEG image buffer
+* @param[in] jpeg_size The JPEG image buffer size
+* @param[in] colorspace The decoded image colorspace
+* @param[in] downscale The downscale value
+* @param[out] image_buffer The image buffer for the decoded image
+* @param[out] width The image width
+* @param[out] height The image height
+* @param[out] size The image buffer size
+*
+* @return @c 0 on success,
+*           otherwise a negative error value
+*
+* @retval #IMAGE_UTIL_ERROR_NONE Successful
+* @retval #IMAGE_UTIL_ERROR_INVALID_PARAMETER Invalid parameter
+* @retval #IMAGE_UTIL_ERROR_OUT_OF_MEMORY out of memory
+* @retval #IMAGE_UTIL_ERROR_NOT_SUPPORTED_FORMAT Format not supported
+* @retval #IMAGE_UTIL_ERROR_INVALID_OPERATION Invalid operation
+* @retval #IMAGE_UTIL_ERROR_PERMISSION_DENIED The application does not have the privilege to call this funtion
+*
+* @see image_util_supported_jpeg_colorspace_cb()
+* @see image_util_decode_jpeg()
+* @see image_util_foreach_supported_jpeg_colorspace()
+*/
+int image_util_decode_jpeg_from_memory_with_downscale(const unsigned char *jpeg_buffer, int jpeg_size, image_util_colorspace_e colorspace, image_util_scale_e downscale, unsigned char **image_buffer, int *width, int *height, unsigned int *size);
 
 /**
 * @brief Encodes the image to the JPEG image.
-* @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+* @since_tizen 2.3
 *
 * @remarks http://tizen.org/privilege/mediastorage is needed if input or output path are relevant to media storage.\n
 *                 http://tizen.org/privilege/externalstorage is needed if input or output path are relevant to external storage.
@@ -455,7 +541,7 @@ int image_util_decode_jpeg_from_memory( const unsigned char * jpeg_buffer , int 
 * @param[in] width The original image width
 * @param[in] height The original image height
 * @param[in] colorspace The original image colorspace
-* @param[in] quality The quality for JPEG image encoding (1 ~ 100)
+* @param[in] quality The quality for JPEG image encoding(1 ~ 100)
 * @param[in] path The file path to be created
 *
 * @return 0 on success,
@@ -472,11 +558,11 @@ int image_util_decode_jpeg_from_memory( const unsigned char * jpeg_buffer , int 
 * @see image_util_foreach_supported_jpeg_colorspace()
 * @see image_util_encode_jpeg_to_memory()
 */
-int image_util_encode_jpeg( const unsigned char *buffer, int width, int height, image_util_colorspace_e colorspace,  int quality, const char *path);
+int image_util_encode_jpeg(const unsigned char *buffer, int width, int height, image_util_colorspace_e colorspace,  int quality, const char *path);
 
 /**
 * @brief Encodes the image to the JPEG image
-* @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+* @since_tizen 2.3
 *
 * @remarks You must release @a jpeg_buffer using free().
 *
@@ -484,7 +570,7 @@ int image_util_encode_jpeg( const unsigned char *buffer, int width, int height, 
 * @param[in] width The image width
 * @param[in] height The image height
 * @param[in] colorspace The original image colorspace
-* @param[in] quality The quality for JPEG image encoding (1 ~ 100)
+* @param[in] quality The quality for JPEG image encoding(1 ~ 100)
 * @param[out] jpeg_buffer The created JPEG image buffer \n
 *                         The buffer is created by frameworks
 * @param[out] jpeg_size The created jpeg image buffer size
@@ -503,7 +589,7 @@ int image_util_encode_jpeg( const unsigned char *buffer, int width, int height, 
 * @see image_util_foreach_supported_jpeg_colorspace()
 * @see image_util_encode_jpeg()
 */
-int image_util_encode_jpeg_to_memory(const unsigned char *image_buffer, int width, int height, image_util_colorspace_e colorspace, int quality,  unsigned char** jpeg_buffer, unsigned int *jpeg_size);
+int image_util_encode_jpeg_to_memory(const unsigned char *image_buffer, int width, int height, image_util_colorspace_e colorspace, int quality,  unsigned char **jpeg_buffer, unsigned int *jpeg_size);
 
 
 

@@ -40,7 +40,7 @@
  *
  * The decoding of a jpeg image located at a given path, to a buffer can be done by calling #image_util_decode_jpeg() function and decoding of a jpeg image on memory
  * can be done by calling #image_util_decode_jpeg_from_memory(). Similarly, for encoding #image_util_encode_jpeg() and #image_util_encode_jpeg_to_memory() functions can be called
- * to encode an image buffer to a jpeg image and a jpeg buffer respectively. The API also allows to transform including convert the colorspace (#image_util_colorspace_e) of an image by calling
+ * to encode an image buffer to a jpeg image and a jpeg buffer respectively. The API also allows to transform including convert the colorspace(#image_util_colorspace_e) of an image by calling
  * #image_util_transform_run() function.
  *
  * @subsection CAPI_MEDIA_IMAGE_UTIL_FOREACH_OPERATIONS Foreach Operations
@@ -58,4 +58,4 @@
  *</table></div>
  */
 
-#endif // __TIZEN_MEDIA_IMAGE_UTIL_DOC_H__
+#endif /* __TIZEN_MEDIA_IMAGE_UTIL_DOC_H__ */
